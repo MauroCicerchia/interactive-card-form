@@ -1,29 +1,46 @@
 <script setup lang="ts">
-import HelloWorld from "./components/HelloWorld.vue";
+import _ from "lodash";
+import { ref } from "vue";
+import Cards from "./components/Cards.vue";
+import Form from "./components/Form.vue";
+
+const cardInfo = ref<CardInfo>({
+	cardholderName: "",
+	cardNumber: "",
+	expDateMM: "",
+	expDateYY: "",
+	cvc: "",
+})
+
+function update(field: string) {
+	return (newValue: string) => {
+		_.set(cardInfo.value, field, newValue);
+	}
+}
 </script>
 
 <template>
-	<div>
-		<a href="https://vitejs.dev" target="_blank">
-			<img src="/vite.svg" class="logo" alt="Vite logo" />
-		</a>
-		<a href="https://vuejs.org/" target="_blank">
-			<img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-		</a>
+	<div id="main">
+		<div id="container">
+			<Cards :cardInfo="cardInfo" />
+			<Form :cardInfo="cardInfo" :update="update" />
+		</div>
 	</div>
-	<HelloWorld msg="Vite + Vue" />
 </template>
 
 <style scoped>
-.logo {
-	height: 6em;
-	padding: 1.5em;
-	will-change: filter;
+#main {
+	height: 100vh;
+	background: url("./assets/bg-main-desktop.png");
+	background-size: contain;
+	background-position: left;
+	background-repeat: no-repeat;
 }
-.logo:hover {
-	filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vue:hover {
-	filter: drop-shadow(0 0 2em #42b883aa);
+
+#container {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	align-content: center;
+	margin: 0 5%;
 }
 </style>

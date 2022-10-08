@@ -2,8 +2,8 @@
 const props = defineProps<{ id: string, placeholder?: string, maxLength?: number, value: string, update: (newValue: string) => void }>();
 
 function onChange(event: Event) {
-  const target = event.target as HTMLInputElement;
-  props.update(target.value);
+	const target = event.target as HTMLInputElement;
+	props.update(target.value);
 }
 </script>
 
@@ -30,19 +30,20 @@ label {
 }
 
 input {
+	color: var(--dark-violet);
 	padding: 0.7rem;
 	width: 400px;
 	outline: none;
-	border: 1px solid var(--light-gray-violet);
+	border: 2px solid var(--light-gray-violet);
 	border-radius: 7px;
 	font-size: 1em;
 	font-weight: 500;
 }
 
 input:focus {
-	border: solid 1px transparent;
+	border: 2px solid transparent;
 	border-radius: 7px;
-	background-image: linear-gradient(white, white), var(--color-primary);
+	background-image: linear-gradient(white, white), var(--color-primary-gradient);
 	background-origin: border-box;
 	background-clip: padding-box, border-box;
 }

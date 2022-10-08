@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import _ from "lodash";
+import { formatCardNumber } from "../utils";
 
 const props = defineProps<{ cardInfo: CardInfo }>();
 
 function cardNumber() {
 	const paddedNumber = _.padEnd(props.cardInfo.cardNumber, 16, "0");
-	return _.chunk(paddedNumber, 4).map(it => it.join("")).join(" ");
+	return formatCardNumber(paddedNumber);
 }
 
 function name() {

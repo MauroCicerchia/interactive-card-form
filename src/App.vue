@@ -5,11 +5,11 @@ import Cards from "./components/Cards.vue";
 import Form from "./components/Form.vue";
 
 const cardInfo = ref<CardInfo>({
-	cardholderName: "",
-	cardNumber: "",
-	expDateMM: "",
-	expDateYY: "",
-	cvc: "",
+	cardholderName: "Mauro Cicerchia",
+	cardNumber: "1234567891230000",
+	expDateMM: "12",
+	expDateYY: "28",
+	cvc: "123",
 })
 
 function update(field: string) {
@@ -17,13 +17,18 @@ function update(field: string) {
 		_.set(cardInfo.value, field, newValue);
 	}
 }
+
+function submit(e: Event) {
+	e.preventDefault();
+	console.log(cardInfo.value);
+}
 </script>
 
 <template>
 	<div id="main">
 		<div id="container">
 			<Cards :cardInfo="cardInfo" />
-			<Form :cardInfo="cardInfo" :update="update" />
+			<Form :cardInfo="cardInfo" :update="update" :submit="submit" />
 		</div>
 	</div>
 </template>

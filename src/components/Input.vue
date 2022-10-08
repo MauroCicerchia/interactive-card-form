@@ -1,5 +1,6 @@
 <script setup lang="ts">
-const props = defineProps<{ id: string, placeholder?: string, maxLength?: number, value: string, update: (newValue: string) => void }>();
+type Size = "sm" | "md" | "lg";
+const props = withDefaults(defineProps<{ id: string, placeholder?: string, maxLength?: number, value: string, update: (newValue: string) => void, size: Size }>(), { size: "lg" });
 
 function onChange(event: Event) {
 	const target = event.target as HTMLInputElement;
@@ -12,18 +13,19 @@ function onChange(event: Event) {
 		<label :for="id">
 			<slot />
 		</label>
-		<input type="text" :id="id" :name="id" :placeholder="placeholder" :value="value" @input="event => onChange(event)" :maxlength="maxLength" />
+		<input type="text" :class="size" :id="id" :name="id" :placeholder="placeholder" :value="value" @input="event => onChange(event)" :maxlength="maxLength" />
 	</div>
 </template>
 
 <style scoped>
 .input-container {
 	margin: 4px 0;
+	width: fit-content;
 }
 
 label {
 	display: block;
-	font-size: 0.8em;
+	font-size: 0.7em;
 	font-weight: 600;
 	letter-spacing: 0.1em;
 	text-transform: uppercase;
@@ -32,7 +34,6 @@ label {
 input {
 	color: var(--dark-violet);
 	padding: 0.7rem;
-	width: 400px;
 	outline: none;
 	border: 2px solid var(--light-gray-violet);
 	border-radius: 7px;
@@ -50,5 +51,17 @@ input:focus {
 
 input::placeholder {
 	color: var(--light-gray-violet);
+}
+
+.sm {
+	width: 90px;
+}
+
+.md {
+	width: 200px;
+}
+
+.lg {
+	width: 400px;
 }
 </style>
